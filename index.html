@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AiFiLands | Verified Land Intelligence Platform</title>
+  <meta name="description"
+    content="AiFiLands is a verified land intelligence platform for agricultural, commercial, and industrial properties.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #006E7F;
+      --primary-dark: #004D59;
+      --secondary: #00A8A8;
+      --secondary-light: #E0F7FA;
+      --accent: #FF6F61;
+      --success: #10B981; /* Green as requested in preferences */
+      --text-dark: #0F172A;
+      --text-medium: #475569;
+      --text-light: #94A3B8;
+      --bg-light: #F8FAFC;
+      --bg-white: #FFFFFF;
+      --bg-gradient-start: linear-gradient(135deg, #F0F9FF 0%, #E6F7FF 100%);
+      --shadow-subtle: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+      --shadow-card: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
+      --shadow-float: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+      --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      --container-width: 1280px;
+      --radius-card: 20px;
+      --radius-btn: 100px;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      color: var(--text-dark);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+    }
+
+    h2 {
+      font-size: 2.5rem;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+    }
+
+    h4 {
+      font-size: 1.25rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.75rem;
+      font-weight: 800;
+    }
+
+    .container {
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      outline: none;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .btn i {
+      margin-right: 10px;
+      font-size: 1.1em;
+      vertical-align: middle;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(0, 110, 127, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 110, 127, 0.4);
+    }
+
+    .btn-primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 110, 127, 0.3);
+      border-color: var(--primary);
+    }
+
+    .btn-outline:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-success:hover {
+      background: linear-gradient(135deg, #059669 0%, var(--success) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-success:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--secondary) 0%, #008e8e 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(0, 168, 168, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #008e8e 0%, var(--secondary) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 168, 168, 0.4);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(-1px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      background-color: var(--secondary-light);
+      color: var(--primary);
+      margin-bottom: 24px;
+    }
+
+    /* Horizontal Process Flow Styles */
+    .process-flow-horizontal {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      gap: 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .process-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      box-shadow: var(--shadow-subtle);
+      transition: var(--transition);
+      min-width: 180px;
+      text-align: center;
+      position: relative;
+    }
+
+    .process-node:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-5px);
+    }
+
+    .node-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 16px;
+      flex-shrink: 0;
+    }
+
+    .node-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .node-content h4 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .node-content p {
+      color: var(--text-medium);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 160px;
+    }
+
+    .flow-connector {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .connector-icon {
+      color: var(--primary);
+      font-size: 1.5rem;
+    }
+
+    .final-node {
+      /* Last node - no connector after */
+    }
+
+    @media (max-width: 1024px) {
+      .process-flow-horizontal {
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+      
+      .process-node {
+        min-width: 150px;
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .process-flow-horizontal {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .flow-connector .connector-icon {
+        transform: rotate(90deg);
+      }
+
+      .process-node {
+        min-width: 200px;
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    .section-padding {
+      padding: 140px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 80px;
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-title h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+
+    .section-title p {
+      color: var(--text-medium);
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      height: 80px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Wrap nav in full width */
+    header .container {
+      max-width: none;
+      width: 100%;
+      padding: 0;
+      height: 100%;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo img {
+      height: 64px;
+      width: auto;
+    }
+
+    .logo span {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #006E7F;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--text-medium);
+      position: relative;
+      padding: 8px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO SECTION - LEANING STRIPS */
+    .hero-wrapper {
+      position: relative;
+      padding-top: 90px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--bg-gradient-start);
+      overflow: hidden;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 60px;
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 32px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-text h1 {
+      font-size: 4.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text h1 span {
+      color: var(--primary);
+    }
+
+    .hero-text p {
+      font-size: 1.35rem;
+      color: var(--text-medium);
+      margin-bottom: 48px;
+      max-width: 95%;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+
+    /* The Mosaic Composition */
+    .hero-mosaic {
+      position: relative;
+      height: 620px;
+      width: 100%;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+    }
+
+    /* Strip 1: Left (Farm) */
+    .mosaic-strip-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Parallelogram leaning left */
+      clip-path: polygon(10% 0, 60% 0, 48% 100%, 0% 100%);
+      z-index: 2;
+    }
+
+    /* Strip 2: Right (Industry + Quarry) */
+    .mosaic-strip-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      /* Parallelogram leaning left, shifted right */
+      clip-path: polygon(63% 0, 100% 0, 88% 100%, 51% 100%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 2%;
+      /* Gap between stacked images */
+    }
+
+    .mosaic-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .hero-mosaic:hover .mosaic-img {
+      transform: scale(1.05);
+    }
+
+    /* Proper stacking in right strip */
+    .mosaic-top {
+      height: 49%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .mosaic-btm {
+      height: 49%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    /* Floating Cards */
+    .floating-cards {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .float-card {
+      width: 140px;
+      height: 140px;
+      background: white;
+      border-radius: 24px;
+      padding: 6px;
+      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .float-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .float-card:hover {
+      transform: translateY(-20px) scale(1.05);
+      box-shadow: 0 25px 50px -5px rgba(0, 0, 0, 0.25);
+    }
+
+    .float-card:nth-child(2) {
+      transform: translateY(-30px);
+    }
+
+    /* Sections */
+    .why-section {
+      background: white;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      padding: 32px;
+      background: white;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      box-shadow: var(--shadow-subtle);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: flex-start;
+    }
+
+    .why-card h3 {
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .why-card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-8px);
+      border-color: rgba(0, 110, 127, 0.1);
+    }
+
+    .why-icon {
+      width: 64px;
+      height: 64px;
+      background: var(--secondary-light);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin: 0 auto 24px;
+      flex-shrink: 0;
+    }
+
+    /* Features/Land Types */
+    .land-types-section {
+      background: #F8FAFC;
+    }
+
+    .types-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .type-card {
+      background: white;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      box-shadow: var(--shadow-subtle);
+      transition: var(--transition);
+    }
+
+    .type-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .type-image {
+      height: 260px;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .type-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .type-content {
+      padding: 32px;
+    }
+
+    .type-card {
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.03);
+    }
+
+    .type-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-hover);
+      border: 1px solid rgba(0, 110, 127, 0.1);
+    }
+
+    /* Scorecard */
+    .scorecard-section {
+      background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      background: radial-gradient(circle at center, #1E293B 0%, #0F172A 70%, #000 100%), linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+      color: white;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0;
+    }
+
+    .score-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-card);
+      padding: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.25);
+    }
+
+    .scorecard-section .section-title h2 {
+      color: #F5F7FA;
+      font-size: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .scorecard-section .section-title p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .score-item {
+      text-align: center;
+    }
+
+    .score-pie {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .score-pie::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: inherit;
+      z-index: -1;
+      filter: blur(15px);
+      opacity: 0.3;
+    }
+
+    .score-item h4 {
+      font-size: 0.9rem;
+      margin-top: 8px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    .pie-green {
+      border: 8px solid #10B981;
+      color: #10B981;
+      background: rgba(16, 185, 129, 0.15);
+    }
+
+    .pie-blue {
+      border: 8px solid #3B82F6;
+      color: #3B82F6;
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .pie-yellow {
+      border: 8px solid #F59E0B;
+      color: #F59E0B;
+      background: rgba(245, 158, 11, 0.15);
+    }
+
+    .pie-red {
+      border: 8px solid #EF4444;
+      color: #EF4444;
+      background: rgba(239, 68, 68, 0.15);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-light);
+      color: var(--text-medium);
+      padding: 120px 0 40px;
+      border-top: 1px solid #F1F5F9;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 80px;
+    }
+
+    .footer-brand h2 {
+      color: var(--primary);
+      font-size: 1.75rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .footer-col h4 {
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 14px;
+      color: var(--text-medium);
+      transition: var(--transition);
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .footer-col a:hover {
+      color: var(--primary);
+      transform: translateX(4px);
+    }
+
+    .footer-btm {
+      padding-top: 40px;
+      border-top: 1px solid #F1F5F9;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Top Footer Bar */
+    .top-footer-bar {
+      background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+      padding: 40px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-footer-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.3;
+    }
+
+    .newsletter-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .newsletter-section h3 {
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      border: none;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--text-dark);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 174, 174, 0.3);
+    }
+
+    .newsletter-btn {
+      width: auto;
+      min-width: 50px;
+      padding: 0 20px !important;
+      border-radius: var(--radius-md);
+    }
+
+    /* Main Footer */
+    .main-footer {
+      background: #1E3A8A;
+      padding: 60px 0 40px;
+      color: white;
+    }
+
+    .main-footer, .main-footer * {
+      color: white;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+
+    .footer-col h4 {
+      color: white;
+      margin-bottom: 24px;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 8px;
+    }
+
+    .footer-col h4::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--secondary);
+      border-radius: 2px;
+    }
+
+    /* Brand Description */
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+    }
+
+    .footer-brand-name {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      color: var(--text-light);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    /* Contact Info */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(0, 110, 127, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+
+    .contact-item span {
+      color: var(--text-light);
+      line-height: 1.6;
+    }
+
+    /* Useful Links */
+    .useful-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-light);
+      text-decoration: none;
+      transition: var(--transition);
+      padding: 6px 0;
+    }
+
+    .footer-link i {
+      min-width: 12px;
+    }
+
+    .footer-link:hover {
+      color: var(--secondary);
+      transform: translateX(5px);
+    }
+
+    .footer-link i {
+      font-size: 0.8rem;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .gallery-item {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    /* Bottom Footer */
+    .bottom-footer {
+      background: #1E3A8A;
+      padding: 24px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .bottom-footer, .bottom-footer * {
+      color: white;
+    }
+
+    .bottom-footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .copyright p {
+      color: var(--text-light);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-icon:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0, 174, 174, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-mosaic {
+        display: none;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .search-bar-container {
+        width: 100%;
+        margin-top: 40px;
+        padding: 24px;
+      }
+
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .score-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .bottom-footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-actions {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .hero-actions .btn {
+        width: 100%;
+      }
+      
+      /* Button group spacing */
+      .hero-actions + div,
+      .section-padding > div:not(.hero-actions) {
+        margin-top: 16px;
+      }
+      
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Search Bar Styles */
+    /* Search Bar Styles */
+    .search-section {
+      position: relative;
+      margin-top: 0;
+      z-index: 10;
+      padding-bottom: 60px;
+      padding-top: 60px;
+      /* Add some top padding */
+    }
+
+    .search-bar-container {
+      background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-float);
+      color: white;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      align-items: end;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-control {
+      height: 48px;
+      border-radius: var(--radius-sm);
+      border: none;
+      padding: 0 16px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: #333;
+      width: 100%;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px top 50%;
+      background-size: 10px auto;
+      background-color: white;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 110, 127, 0.2);
+    }
+
+    .range-slider-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 48px;
+      padding: 0 10px;
+    }
+
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 8px;
+    }
+
+    .slider-track {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .slider-fill {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #99f6e4;
+      /* Light teal */
+      border-radius: 4px;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .thumb-left {
+      left: 0;
+    }
+
+    .thumb-right {
+      right: 0;
+    }
+
+    .btn-search {
+      background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+      color: white;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      font-weight: 600;
+      border: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-search:hover {
+      background: linear-gradient(135deg, #1a1a1a 0%, #000 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-advance {
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-advance:hover {
+      background: rgba(0, 0, 0, 0.85);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          <img src="images/logo.png" alt="AiFiLands Logo">
+          <span>AiFiLands</span>
+        </div>
+        <div class="nav-links">
+          <a href="#">Home</a><a href="#why">Why Us</a><a href="#types">Properties</a><a href="#score">Scorecards</a>
+        </div>
+        <div class="nav-actions">
+          <a href="#contact" class="btn btn-outline" style="padding:12px 24px;">Login</a>
+          <a href="#contact" class="btn btn-primary" style="padding:12px 24px;">Get Verified</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero-wrapper">
+    <div class="hero-container">
+      <div class="hero-text">
+        <div class="badge"><i class="fas fa-shield-alt" style="margin-right:6px;"></i>Verified Intelligence Platform
+        </div>
+        <h1>Agricultural & <br><span>Commercial Properties.</span></h1>
+        <p>Farm Lands. Farm Plots. Industrial & Commercial Lands — verified, scored, and intelligence-backed.</p>
+
+        <div
+          style="margin-top: 24px; margin-bottom: 32px; font-size: 1rem; color: var(--text-medium); max-width: 600px;">
+          We combine ground verification, legal checks, and AI-assisted scoring to help buyers, founders, and serious
+          investors make high-conviction land decisions.
+        </div>
+
+        <div class="hero-actions">
+          <a href="#types" class="btn btn-primary"><i class="fas fa-search"></i>Explore Verified Lands</a>
+          <a href="#contact" class="btn btn-outline"><i class="fas fa-headset"></i>Request Expert Review</a>
+        </div>
+        <!-- Trust indicators omitted for brevity but can be added -->
+      </div>
+
+      <!-- MOSAIC COMPOSITION (LEANING STRIPS) -->
+      <div class="hero-mosaic">
+        <!-- Left Strip: Farm -->
+        <div class="mosaic-strip-left">
+          <img src="images/Picture1.png" alt="Farm Land" class="mosaic-img">
+        </div>
+
+        <!-- Right Strip: Industry (Top) + Quarry (Bottom) -->
+        <div class="mosaic-strip-right">
+          <!-- Top: Industry -->
+          <div class="mosaic-top">
+            <img src="images/Picture5.png" alt="Industrial Chimneys" class="mosaic-img">
+          </div>
+          <!-- Bottom: Quarry -->
+          <div class="mosaic-btm">
+            <img src="images/Picture2.png" alt="Quarry Mining" class="mosaic-img">
+          </div>
+        </div>
+
+        <!-- Floating Cards -->
+        <div class="floating-cards">
+          <div class="float-card"><img src="images/Picture3.png" alt="Thumbnail 1"></div>
+          <div class="float-card"><img src="images/Picture4.png" alt="Thumbnail 2"></div>
+          <div class="float-card"><img src="images/Picture1.png" alt="Thumbnail 3"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH FILTER BAR -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-bar-container">
+        <div class="search-grid">
+          <!-- Row 1 -->
+          <div class="form-group">
+            <select class="form-control">
+              <option>Select Land Type</option>
+              <option>Agricultural</option>
+              <option>Industrial</option>
+              <option>Commercial</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control">
+              <option>Select Transaction Type</option>
+              <option>Buy</option>
+              <option>Lease</option>
+              <option>JV</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control">
+              <option>Select Verification Level</option>
+              <option>Gold (90+)</option>
+              <option>Silver (75+)</option>
+              <option>Bronze (60+)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control">
+              <option>Extent (Land Size)</option>
+              <option>0 - 5 Acres</option>
+              <option>5 - 20 Acres</option>
+              <option>20+ Acres</option>
+            </select>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="form-group">
+            <select class="form-control">
+              <option>Select Soil Type</option>
+              <option>Red Soil</option>
+              <option>Black Cotton</option>
+              <option>Alluvial</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <div class="range-slider-container">
+              <div class="slider-track">
+                <div class="slider-fill"></div>
+                <div class="slider-thumb thumb-left"></div>
+                <div class="slider-thumb thumb-right"></div>
+              </div>
+              <div class="range-labels">
+                <span>INR 0</span>
+                <span>INR 1,50,00,000</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <button class="btn btn-advance">Advance <i class="fas fa-sliders-h"></i></button>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-search">Search</button>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- Why AiFiLands Exists -->
+  <section class="section-padding why-section" id="why">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why AiFiLands Exists</h2>
+        <p>Land transactions fail because of:</p>
+      </div>
+      <div class="why-grid" style="grid-template-columns: repeat(5, 1fr); gap: 24px;">
+        <div class="why-card">
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-exclamation-triangle"></i></div>
+          <h3>Unclear<br>Land Use</h3>
+        </div>
+        <div class="why-card">
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-gavel"></i></div>
+          <h3>Regulatory<br>Blind Spots</h3>
+        </div>
+        <div class="why-card">
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-ruler-combined"></i></div>
+          <h3>Zoning &<br>Conversion Risks</h3>
+        </div>
+        <div class="why-card">
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-lock"></i></div>
+          <h3>Hidden<br>Encumbrances</h3>
+        </div>
+        <div class="why-card">
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-chart-line"></i></div>
+          <h3>Emotionally<br>Driven Pricing</h3>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 40px; font-size: 1.25rem; font-weight: 600; color: var(--primary);">
+        AiFiLands replaces guesswork with structured intelligence.
+      </div>
+    </div>
+  </section>
+
+  <!-- What Makes AiFiLands Different -->
+  <section class="section-padding" style="background: #F0F9FA;">
+    <div class="container">
+      <div class="section-title">
+        <h2>What Makes AiFiLands Different</h2>
+      </div>
+      <div class="why-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <!-- 1 -->
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Verification-First</h3>
+          <p>Every land parcel passes document, field, and legal verification (Not Listing-First).</p>
+        </div>
+        <!-- 2 -->
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-chart-pie"></i></div>
+          <h3>Unified Land Scorecard</h3>
+          <p>Objective scoring across Legal, Zoning, Location & Pricing.</p>
+        </div>
+        <!-- 3 -->
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <h3>On-Ground Verification</h3>
+          <p>Geo-tagged photos, videos, access checks & boundary validation.</p>
+        </div>
+        <!-- 4 -->
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-lock"></i></div>
+          <h3>Founder Priority</h3>
+          <p>Private access to high-score, distressed, or undervalued lands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Land Types -->
+  <section class="section-padding land-types-section" id="types">
+    <div class="container">
+      <div class="section-title">
+        <h2>Types of Lands Covered</h2>
+        <p>Comprehensive coverage across sectors.</p>
+      </div>
+      <div class="types-grid">
+        <!-- 1 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
+            </h3>
+          </div>
+        </div>
+        <!-- 2 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
+            </h3>
+          </div>
+        </div>
+        <!-- 3 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
+          </div>
+        </div>
+        <!-- 4 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
+            </h3>
+          </div>
+        </div>
+        <!-- 5 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
+          </div>
+        </div>
+        <!-- 6 -->
+        <div class="type-card">
+          <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
+          <div class="type-content">
+            <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scorecard Snapshot -->
+  <section class="section-padding scorecard-section" id="score">
+    <div class="container">
+      <div class="section-title">
+        <h2>Property Score Snapshot</h2>
+        <p>Instant clarity on risk and potential.</p>
+      </div>
+      <div class="score-container">
+        <div class="score-grid">
+          <div class="score-item">
+            <div class="score-pie pie-green">80+</div>
+            <h4>Excellent</h4>
+          </div>
+          <div class="score-item">
+            <div class="score-pie pie-blue">65+</div>
+            <h4>Good</h4>
+          </div>
+          <div class="score-item">
+            <div class="score-pie pie-yellow">50+</div>
+            <h4>Moderate</h4>
+          </div>
+          <div class="score-item">
+            <div class="score-pie pie-red">&lt;50</div>
+            <h4>High Risk</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who Uses & CTA -->
+  <section class="section-padding" style="background:white;">
+    <div class="container">
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+        <div>
+          <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 32px;">Who Uses AiFiLands</h2>
+          <ul style="font-size: 1.2rem; line-height: 2; margin-bottom: 32px;">
+            <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right: 12px;"></i>Farmland buyers &
+              agri-investors</li>
+            <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right: 12px;"></i>Industrial &
+              commercial land buyers</li>
+            <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right: 12px;"></i>Quarry & mining
+              operators</li>
+            <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right: 12px;"></i>Founders sourcing
+              undervalued land</li>
+            <li><i class="fas fa-check-circle" style="color:var(--primary); margin-right: 12px;"></i>Long-term land
+              investors</li>
+          </ul>
+        </div>
+        <div style="background: var(--bg-light); padding: 48px; border-radius: 32px; text-align: center;">
+          <h3 style="font-size: 1.5rem; margin-bottom: 24px;">If the land type is complex —<br>your due diligence must
+            be stronger.</h3>
+          <div style="display:flex; flex-direction: column; gap: 16px;">
+            <a href="#" class="btn btn-primary" style="width: 100%;"><i class="fas fa-search"></i>Explore Verified Properties</a>
+            <a href="#" class="btn btn-outline" style="width: 100%;"><i class="fas fa-headset"></i>Speak to Land Intelligence Team</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section-padding" style="background: #F8FAFC;">
+    <div class="container">
+      <div class="section-title">
+        <h2>How AiFiLands Works</h2>
+        <p>Step-by-step verification flow.</p>
+      </div>
+
+      <div class="process-flow-horizontal">
+        <!-- Step 1 -->
+        <div class="process-node">
+          <div class="node-number">1</div>
+          <div class="node-content">
+            <h4>Seller Submission</h4>
+            <p>Land type declared, Documents uploaded, Usage stated.</p>
+          </div>
+        </div>
+        
+        <div class="flow-connector">
+          <i class="fas fa-arrow-right connector-icon"></i>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="process-node">
+          <div class="node-number">2</div>
+          <div class="node-content">
+            <h4>Field Verification</h4>
+            <p>Access check, Boundaries, Neighbouring activity.</p>
+          </div>
+        </div>
+        
+        <div class="flow-connector">
+          <i class="fas fa-arrow-right connector-icon"></i>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="process-node">
+          <div class="node-number">3</div>
+          <div class="node-content">
+            <h4>Legal Review</h4>
+            <p>Ownership checks, Zoning review, Litigation screening.</p>
+          </div>
+        </div>
+        
+        <div class="flow-connector">
+          <i class="fas fa-arrow-right connector-icon"></i>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="process-node">
+          <div class="node-number">4</div>
+          <div class="node-content">
+            <h4>AI Scorecard</h4>
+            <p>Legal clarity, Growth score, Pricing accuracy.</p>
+          </div>
+        </div>
+        
+        <div class="flow-connector">
+          <i class="fas fa-arrow-right connector-icon"></i>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="process-node final-node">
+          <div class="node-number">5</div>
+          <div class="node-content">
+            <h4>Listing / Lock</h4>
+            <p>Public listing or Private founder evaluation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <!-- Top Newsletter Bar -->
+    <div class="top-footer-bar">
+      <div class="container">
+        <div class="newsletter-section">
+          <h3>SUBSCRIBE NEWSLETTER</h3>
+          <div class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" class="newsletter-input">
+            <button class="btn btn-success newsletter-btn">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Main Footer Area -->
+    <div class="main-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Column 1 - Brand Description -->
+          <div class="footer-col">
+            <div class="footer-logo">
+              <img src="images/logo.png" alt="AiFiLands Logo" class="logo-img">
+              <h2 class="footer-brand-name">AiFiLands</h2>
+            </div>
+            <p class="footer-description">
+              AiFiLands is a verified land intelligence platform that combines ground verification, 
+              legal checks, and AI-assisted scoring to help buyers, founders, and investors 
+              make high-conviction land decisions.
+            </p>
+          </div>
+          
+          <!-- Column 2 - Contact Information -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Contact Info</h4>
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span>123 Business Park, Tech City, India 560001</span>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span>info@aifilands.com</span>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span>+91 98765 43210</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Column 3 - Useful Links -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Useful Links</h4>
+            <div class="useful-links">
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>Home
+              </a>
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>About Us
+              </a>
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>Services
+              </a>
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>Properties
+              </a>
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>Contact
+              </a>
+              <a href="#" class="footer-link">
+                <i class="fas fa-chevron-right"></i>Blog
+              </a>
+            </div>
+          </div>
+          
+          <!-- Column 4 - Gallery -->
+          <div class="footer-col">
+            <h4 class="footer-heading">Our Gallery</h4>
+            <div class="gallery-grid">
+              <div class="gallery-item">
+                <img src="images/Picture1.png" alt="Gallery Image 1">
+              </div>
+              <div class="gallery-item">
+                <img src="images/Picture2.png" alt="Gallery Image 2">
+              </div>
+              <div class="gallery-item">
+                <img src="images/Picture3.png" alt="Gallery Image 3">
+              </div>
+              <div class="gallery-item">
+                <img src="images/Picture4.png" alt="Gallery Image 4">
+              </div>
+              <div class="gallery-item">
+                <img src="images/Picture5.png" alt="Gallery Image 5">
+              </div>
+              <div class="gallery-item">
+                <img src="images/Picture1.png" alt="Gallery Image 6">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Footer Bar -->
+    <div class="bottom-footer">
+      <div class="container">
+        <div class="bottom-footer-content">
+          <div class="copyright">
+            <p>&copy; 2025 AiFiLands Intelligence Pvt Ltd. All Rights Reserved.</p>
+          </div>
+          <div class="social-icons">
+            <a href="#" class="social-icon">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" class="social-icon">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
