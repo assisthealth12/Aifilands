@@ -465,13 +465,13 @@
       max-width: var(--container-width);
       margin: 0 auto;
       padding: 0 32px;
-      align-items: center;
+      align-items: start;
       position: relative;
       z-index: 1;
     }
 
     .hero-text h1 {
-      font-size: 4.5rem;
+      font-size: 2.8rem;
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 24px;
@@ -496,6 +496,70 @@
       display: flex;
       gap: 20px;
       flex-wrap: nowrap;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-top: 28px;
+    }
+    
+    @media (min-width: 769px) {
+      .hero-actions {
+        flex-wrap: nowrap;
+      }
+    }
+    
+    .hero-actions .btn {
+      height: 52px;
+      padding: 14px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-btn);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: var(--transition);
+      outline: none;
+      letter-spacing: -0.01em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      border: 2px solid transparent;
+    }
+    
+    .hero-actions .btn i {
+      margin-right: 12px;
+      font-size: 1.1em;
+      vertical-align: middle;
+    }
+    
+    .hero-actions .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 16px rgba(0, 110, 127, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-actions .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 110, 127, 0.4);
+    }
+    
+    .hero-actions .btn-outline {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1.5px solid rgba(0, 110, 127, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-actions .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 110, 127, 0.3);
+      border-color: var(--primary);
     }
 
     /* The Mosaic Composition */
@@ -503,7 +567,7 @@
       position: relative;
       height: 620px;
       width: 100%;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
     }
 
     /* Strip 1: Left (Farm) */
@@ -539,10 +603,24 @@
       height: 100%;
       object-fit: cover;
       transition: transform 0.7s ease;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .mosaic-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.02) 50%, rgba(255,255,255,0.05) 100%);
+      pointer-events: none;
+      border-radius: 8px;
     }
 
     .hero-mosaic:hover .mosaic-img {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
 
     /* Proper stacking in right strip */
@@ -550,12 +628,14 @@
       height: 49%;
       width: 100%;
       overflow: hidden;
+      position: relative;
     }
 
     .mosaic-btm {
       height: 49%;
       width: 100%;
       overflow: hidden;
+      position: relative;
     }
 
     /* Floating Cards */
@@ -573,27 +653,29 @@
     .float-card {
       width: 140px;
       height: 140px;
-      background: white;
-      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
       padding: 6px;
-      box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
       transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .float-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 12px;
     }
 
     .float-card:hover {
-      transform: translateY(-20px) scale(1.05);
-      box-shadow: 0 25px 50px -5px rgba(0, 0, 0, 0.25);
+      transform: translateY(-15px) scale(1.03);
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
     }
 
     .float-card:nth-child(2) {
-      transform: translateY(-30px);
+      transform: translateY(-25px);
     }
 
     /* Sections */
@@ -604,11 +686,11 @@
     .why-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 24px;
+      gap: 16px;
     }
 
     .why-card {
-      padding: 32px;
+      padding: 24px;
       background: white;
       border-radius: var(--radius-card);
       border: 1px solid rgba(0, 0, 0, 0.05);
@@ -618,10 +700,14 @@
       flex-direction: column;
       height: 100%;
       justify-content: flex-start;
+      align-items: center;
+      text-align: center;
     }
 
     .why-card h3 {
-      margin-top: auto;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      margin: 0;
       text-align: center;
     }
 
@@ -650,10 +736,57 @@
       background: #F8FAFC;
     }
 
-    .types-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 32px;
+    .types-carousel {
+      overflow: hidden;
+      padding: 20px 0;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .carousel-track {
+      display: flex;
+      width: 200%; /* Double the width to accommodate duplicated items */
+      animation: scroll 20s linear infinite;
+    }
+
+    .carousel-track:hover {
+      animation-play-state: paused;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      margin-right: 32px;
+      width: 280px;
+    }
+
+    .type-content h3 {
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+      padding: 8px;
+    }
+
+    .type-content {
+      padding: 16px;
+    }
+
+    .carousel-item:last-child {
+      margin-right: 0;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .type-card {
@@ -1396,9 +1529,7 @@
   <section class="hero-wrapper">
     <div class="hero-container">
       <div class="hero-text">
-        <div class="badge"><i class="fas fa-shield-alt" style="margin-right:6px;"></i>Verified Intelligence Platform
-        </div>
-        <h1>Agricultural & <br><span>Commercial Properties.</span></h1>
+        <h1>Verified Land Intelligence Platform for Agricultural & <br><span>Commercial Properties.</span></h1>
         <p>Farm Lands. Farm Plots. Industrial & Commercial Lands — verified, scored, and intelligence-backed.</p>
 
         <div
@@ -1557,7 +1688,7 @@
       <div class="section-title">
         <h2>What Makes AiFiLands Different</h2>
       </div>
-      <div class="why-grid" style="grid-template-columns: repeat(4, 1fr);">
+      <div class="why-grid" style="grid-template-columns: repeat(3, 1fr); gap: 24px;">
         <!-- 1 -->
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
@@ -1576,12 +1707,6 @@
           <h3>On-Ground Verification</h3>
           <p>Geo-tagged photos, videos, access checks & boundary validation.</p>
         </div>
-        <!-- 4 -->
-        <div class="why-card">
-          <div class="why-icon"><i class="fas fa-lock"></i></div>
-          <h3>Founder Priority</h3>
-          <p>Private access to high-score, distressed, or undervalued lands.</p>
-        </div>
       </div>
     </div>
   </section>
@@ -1593,51 +1718,103 @@
         <h2>Types of Lands Covered</h2>
         <p>Comprehensive coverage across sectors.</p>
       </div>
-      <div class="types-grid">
-        <!-- 1 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
-            </h3>
-          </div>
-        </div>
-        <!-- 2 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
-            </h3>
-          </div>
-        </div>
-        <!-- 3 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
-          </div>
-        </div>
-        <!-- 4 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
-            </h3>
-          </div>
-        </div>
-        <!-- 5 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
-          </div>
-        </div>
-        <!-- 6 -->
-        <div class="type-card">
-          <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
-          <div class="type-content">
-            <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
-            </h3>
+      <div class="types-carousel">
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <!-- 1 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
+                </h3>
+              </div>
+            </div>
+            <!-- 2 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
+                </h3>
+              </div>
+            </div>
+            <!-- 3 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
+              </div>
+            </div>
+            <!-- 4 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
+                </h3>
+              </div>
+            </div>
+            <!-- 5 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
+              </div>
+            </div>
+            <!-- 6 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
+                </h3>
+              </div>
+            </div>
+            
+            <!-- Duplicate items for infinite scroll effect -->
+            <!-- 1 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
+                </h3>
+              </div>
+            </div>
+            <!-- 2 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
+                </h3>
+              </div>
+            </div>
+            <!-- 3 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
+              </div>
+            </div>
+            <!-- 4 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
+                </h3>
+              </div>
+            </div>
+            <!-- 5 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
+              </div>
+            </div>
+            <!-- 6 -->
+            <div class="type-card carousel-item">
+              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-content">
+                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
+                </h3>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1771,7 +1948,7 @@
           <div class="node-number">5</div>
           <div class="node-content">
             <h4>Listing / Lock</h4>
-            <p>Public listing or Private founder evaluation.</p>
+            <p>Public listing.</p>
           </div>
         </div>
       </div>
