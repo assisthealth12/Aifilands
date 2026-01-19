@@ -638,21 +638,18 @@
     .hero-thumbnails {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      /* Fixed 3 columns */
       gap: 16px;
-      height: 110px;
-      margin-top: 4px;
-      /* Match the width of the slanted bottom approx */
-      width: 90%;
+      margin-top: 16px;
+      width: 100%;
     }
 
     .thumbnail-item {
+      aspect-ratio: 16 / 9;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       background: var(--bg-white);
       position: relative;
-      height: 100%;
       /* No user interaction cues */
       pointer-events: none;
     }
@@ -676,7 +673,14 @@
     .why-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 16px;
+      gap: 24px;
+    }
+
+    .user-section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
     }
 
     .why-card {
@@ -795,106 +799,6 @@
     }
 
     /* --- RESPONSIVE MEDIA QUERIES --- */
-
-    @media (max-width: 1200px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 40px;
-      }
-
-      .hero-text p {
-        margin: 0 auto 40px;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-slanted-container {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .container {
-        padding: 0 24px;
-      }
-
-      .why-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      header {
-        padding: 0 24px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
-
-      .nav-links,
-      .nav-actions {
-        display: none;
-      }
-
-      /* Mobile Nav Active */
-      .nav-active .nav-links {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        background: white;
-        padding: 24px;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        z-index: 1001;
-      }
-
-      .nav-active .nav-actions {
-        display: none;
-        /* Can be moved inside nav-links for mobile */
-      }
-
-      .hero-text h1 {
-        font-size: 2.25rem;
-      }
-
-      .hero-text h2 {
-        font-size: 1.5rem;
-      }
-
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .section-title h2 {
-        font-size: 2.25rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-text h1 {
-        font-size: 1.85rem;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      .why-grid {
-        grid-template-columns: 1fr;
-      }
-    }
 
     .type-content {
       padding: 32px;
@@ -1351,33 +1255,101 @@
       box-shadow: 0 6px 12px rgba(0, 174, 174, 0.3);
     }
 
-    @media (max-width: 1024px) {
+    /* --- UNIFIED RESPONSIVE DESIGN --- */
+
+    @media (max-width: 1200px) {
+      :root {
+        --container-width: 100%;
+      }
+
       .hero-container {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 40px;
       }
 
-      .hero-image-container {
-        flex: none;
-        margin-top: 40px;
-      }
-
-      .hero-main {
-        height: 280px;
-      }
-
-      .hero-thumbnails {
-        height: 100px;
+      .hero-text p {
+        margin: 0 auto 40px;
+        max-width: 800px;
       }
 
       .hero-actions {
         justify-content: center;
       }
 
-      .search-bar-container {
+      .hero-slanted-container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .section-padding {
+        padding: 100px 0;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .user-section-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 0 20px;
+      }
+
+      .logo img {
+        height: 48px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      .nav-active .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
         width: 100%;
-        margin-top: 40px;
-        padding: 24px;
+        background: white;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        gap: 20px;
+      }
+
+      .nav-active .nav-links a {
+        font-size: 1.1rem;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .search-grid {
@@ -1385,93 +1357,51 @@
       }
 
       .score-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-flow-horizontal {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .flow-connector i {
+        transform: rotate(90deg);
       }
 
       .footer-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
       }
 
       .newsletter-form {
         flex-direction: column;
       }
-
-      .bottom-footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-main {
-        height: 240px;
-      }
-
-      .hero-thumbnails {
-        display: flex;
-        height: auto;
-        min-height: 100px;
-      }
-
-      .thumbnail-item {
-        flex: 1;
-        height: 100px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .hero-actions {
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .hero-actions .btn {
-        width: 100%;
-      }
-
-      /* Button group spacing */
-      .hero-actions+div,
-      .section-padding>div:not(.hero-actions) {
-        margin-top: 16px;
-      }
-
-      .why-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
     }
 
     @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
       .why-grid {
         grid-template-columns: 1fr;
-        gap: 16px;
       }
-    }
 
-    @media (max-width: 768px) {
-      .footer-grid {
+      .score-grid {
         grid-template-columns: 1fr;
       }
 
-      .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .section-title h2 {
+        font-size: 2rem;
       }
     }
 
@@ -1771,7 +1701,7 @@
         <h2>Why AiFiLands Exists</h2>
         <p>Land transactions fail because of:</p>
       </div>
-      <div class="why-grid" style="grid-template-columns: repeat(5, 1fr); gap: 24px;">
+      <div class="why-grid">
         <div class="why-card">
           <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i
               class="fas fa-exclamation-triangle"></i></div>
@@ -1810,7 +1740,7 @@
       <div class="section-title">
         <h2>What Makes AiFiLands Different</h2>
       </div>
-      <div class="why-grid" style="grid-template-columns: repeat(3, 1fr); gap: 24px;">
+      <div class="why-grid" style="grid-template-columns: repeat(3, 1fr);">
         <!-- 1 -->
         <div class="why-card">
           <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
@@ -2000,7 +1930,7 @@
   <!-- Who Uses & CTA -->
   <section class="section-padding" style="background:white;">
     <div class="container">
-      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div class="user-section-grid">
         <div>
           <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 32px;">Who Uses AiFiLands</h2>
           <ul style="font-size: 1.2rem; line-height: 2; margin-bottom: 32px;">
