@@ -299,10 +299,6 @@
       font-size: 1.5rem;
     }
 
-    .final-node {
-      /* Last node - no connector after */
-    }
-
     @media (max-width: 1024px) {
       .process-flow-horizontal {
         flex-wrap: wrap;
@@ -410,6 +406,14 @@
       letter-spacing: -0.02em;
     }
 
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+
     .nav-links {
       display: flex;
       gap: 32px;
@@ -472,36 +476,35 @@
     }
 
     .hero-text h1 {
-      font-size: 2.8rem;
+      font-size: 3.2rem;
       font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-
-    .hero-text h1 span {
+      line-height: 1.2;
+      margin-bottom: 16px;
       color: var(--primary);
     }
 
+    .hero-text h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--secondary);
+      margin-bottom: 24px;
+      line-height: 1.3;
+    }
+
     .hero-text p {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
       color: var(--text-medium);
-      margin-bottom: 48px;
-      max-width: 95%;
+      margin-bottom: 40px;
+      max-width: 90%;
     }
 
     .hero-actions {
       display: flex;
-      gap: 20px;
-      flex-wrap: nowrap;
-      flex-direction: row;
+      gap: 16px;
+      flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center;
-      margin-top: 28px;
+      margin-top: 24px;
     }
 
     @media (min-width: 769px) {
@@ -588,11 +591,11 @@
       /* Increased height for better aspect ratio */
       position: relative;
       width: 100%;
-      /* The shape is defined by the SVG clipPath */
-      clip-path: url(#hero-clip-path);
-      /* Drop shadow that follows the clip-path shape */
-      filter: drop-shadow(0 15px 30px rgba(0, 110, 127, 0.25));
+      /* Removed slant: clip-path: url(#hero-clip-path); */
       background: var(--bg-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
       /* Ensure logic separation */
       z-index: 10;
     }
@@ -791,16 +794,106 @@
       box-shadow: var(--shadow-hover);
     }
 
-    .type-image {
-      height: 260px;
-      width: 100%;
-      object-fit: cover;
+    /* --- RESPONSIVE MEDIA QUERIES --- */
+
+    @media (max-width: 1200px) {
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 40px;
+      }
+
+      .hero-text p {
+        margin: 0 auto 40px;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-slanted-container {
+        max-width: 600px;
+        margin: 0 auto;
+      }
     }
 
-    .type-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 24px;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      header {
+        padding: 0 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links,
+      .nav-actions {
+        display: none;
+      }
+
+      /* Mobile Nav Active */
+      .nav-active .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 24px;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+      }
+
+      .nav-active .nav-actions {
+        display: none;
+        /* Can be moved inside nav-links for mobile */
+      }
+
+      .hero-text h1 {
+        font-size: 2.25rem;
+      }
+
+      .hero-text h2 {
+        font-size: 1.5rem;
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .section-title h2 {
+        font-size: 2.25rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 1.85rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .type-content {
@@ -1535,27 +1628,14 @@
 
 <body>
   <header>
-    <!-- SVG Clip Path Definition for Slanted Hero -->
-    <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;">
-      <defs>
-        <clipPath id="hero-clip-path" clipPathUnits="objectBoundingBox">
-          <!-- 
-             Refined Shape: Reduced corner radius to minimize aspect ratio distortion.
-             Top-Left: (0.02, 0)
-             Top-Right: (0.95, 0) -> slant start
-             Bottom-Right: (0.85, 1) -> slant end
-             Bottom-Left: (0.02, 1)
-          -->
-          <path
-            d="M 0.03,0 L 0.95,0 C 0.98,0 1.0,0.01 0.99,0.04 L 0.89,0.96 C 0.88,0.99 0.86,1 0.83,1 L 0.03,1 C 0.01,1 0,0.99 0,0.97 L 0,0.03 C 0,0.01 0.01,0 0.03,0 Z" />
-        </clipPath>
-      </defs>
-    </svg>
     <div class="container">
       <nav>
         <div class="logo">
           <img src="images/logo.png" alt="AiFiLands Logo">
           <span>AiFiLands</span>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+          <i class="fas fa-bars"></i>
         </div>
         <div class="nav-links">
           <a href="#">Home</a><a href="#">About Us</a><a href="#">Services</a><a href="#types">Properties</a><a
@@ -1572,14 +1652,9 @@
   <section class="hero-wrapper">
     <div class="hero-container">
       <div class="hero-text">
-        <h1>Verified Land Intelligence Platform for Agricultural & <br><span>Commercial Properties.</span></h1>
-        <p>Farm Lands. Farm Plots. Industrial & Commercial Lands — verified, scored, and intelligence-backed.</p>
-
-        <div
-          style="margin-top: 24px; margin-bottom: 32px; font-size: 1rem; color: var(--text-medium); max-width: 600px;">
-          We combine ground verification, legal checks, and AI-assisted scoring to help buyers, founders, and serious
-          investors make high-conviction land decisions.
-        </div>
+        <h1>Welcome to India's First<br>AI-Verified Land Platform</h1>
+        <h2>Buy land without blind risk.</h2>
+        <p>Agricultural and commercial lands verified before you invest.</p>
 
         <div class="hero-actions">
           <a href="#types" class="btn btn-primary"><i class="fas fa-search"></i>Explore Verified Lands</a>
@@ -2258,6 +2333,24 @@
 
       // Start Loop
       setInterval(rotateImages, INTERVAL_MS);
+
+      // Mobile Menu Toggle
+      const mobileMenu = document.getElementById('mobile-menu');
+      const header = document.querySelector('header');
+
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+          header.classList.toggle('nav-active');
+          const icon = mobileMenu.querySelector('i');
+          if (header.classList.contains('nav-active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+          } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+          }
+        });
+      }
     });
   </script>
 </body>
