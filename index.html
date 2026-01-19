@@ -24,7 +24,8 @@
       --secondary: #00A8A8;
       --secondary-light: #E0F7FA;
       --accent: #FF6F61;
-      --success: #10B981; /* Green as requested in preferences */
+      --success: #10B981;
+      /* Green as requested in preferences */
       --text-dark: #0F172A;
       --text-medium: #475569;
       --text-light: #94A3B8;
@@ -307,7 +308,7 @@
         flex-wrap: wrap;
         gap: 24px;
       }
-      
+
       .process-node {
         min-width: 150px;
         padding: 20px 16px;
@@ -459,7 +460,7 @@
 
     .hero-container {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 1fr 0.8fr;
       gap: 60px;
       width: 100%;
       max-width: var(--container-width);
@@ -481,6 +482,7 @@
       color: transparent;
     }
 
+
     .hero-text h1 span {
       color: var(--primary);
     }
@@ -501,13 +503,13 @@
       align-items: center;
       margin-top: 28px;
     }
-    
+
     @media (min-width: 769px) {
       .hero-actions {
         flex-wrap: nowrap;
       }
     }
-    
+
     .hero-actions .btn {
       height: 52px;
       padding: 14px 24px;
@@ -525,13 +527,13 @@
       -moz-osx-font-smoothing: grayscale;
       border: 2px solid transparent;
     }
-    
+
     .hero-actions .btn i {
       margin-right: 12px;
       font-size: 1.1em;
       vertical-align: middle;
     }
-    
+
     .hero-actions .btn-primary {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
@@ -539,13 +541,13 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .hero-actions .btn-primary:hover {
       background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
       transform: translateY(-3px);
       box-shadow: 0 8px 25px rgba(0, 110, 127, 0.4);
     }
-    
+
     .hero-actions .btn-outline {
       background-color: transparent;
       color: var(--primary);
@@ -553,7 +555,7 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .hero-actions .btn-outline:hover {
       background-color: var(--primary);
       color: white;
@@ -562,121 +564,106 @@
       border-color: var(--primary);
     }
 
-    /* The Mosaic Composition */
-    .hero-mosaic {
-      position: relative;
-      height: 620px;
-      width: 100%;
-      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
-    }
-
-    /* Strip 1: Left (Farm) */
-    .mosaic-strip-left {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      /* Parallelogram leaning left */
-      clip-path: polygon(10% 0, 60% 0, 48% 100%, 0% 100%);
-      z-index: 2;
-    }
-
-    /* Strip 2: Right (Industry + Quarry) */
-    .mosaic-strip-right {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      /* Parallelogram leaning left, shifted right */
-      clip-path: polygon(63% 0, 100% 0, 88% 100%, 51% 100%);
-      z-index: 2;
+    /* Slanted Hero Container */
+    .hero-slanted-container {
+      flex: 0 0 55%;
       display: flex;
       flex-direction: column;
-      gap: 2%;
-      /* Gap between stacked images */
+      gap: 20px;
     }
 
-    .mosaic-img {
+    .hero-slanted-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      /* Ensure proper spacing for the shadow */
+      padding-right: 20px;
+      padding-bottom: 20px;
+    }
+
+    /* True Slanted Hero Image with Diagonal Cut */
+    .hero-slanted-frame {
+      height: 380px;
+      /* Increased height for better aspect ratio */
+      position: relative;
+      width: 100%;
+      /* The shape is defined by the SVG clipPath */
+      clip-path: url(#hero-clip-path);
+      /* Drop shadow that follows the clip-path shape */
+      filter: drop-shadow(0 15px 30px rgba(0, 110, 127, 0.25));
+      background: var(--bg-white);
+      /* Ensure logic separation */
+      z-index: 10;
+    }
+
+    .hero-slanted-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.7s ease;
-      border-radius: 8px;
-      position: relative;
-    }
-
-    .mosaic-img::before {
-      content: '';
       position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 30%, rgba(0,0,0,0.02) 50%, rgba(255,255,255,0.05) 100%);
+      /* Initial state */
+      opacity: 0;
+      transform: scale(1.0);
+      transform-origin: center center;
+      transition: opacity 900ms ease-in-out, transform 900ms ease-in-out;
+      will-change: opacity, transform;
+    }
+
+    .hero-slanted-img.active {
+      opacity: 1 !important;
+      /* Force visibility over .next */
+      z-index: 2;
+      transform: scale(1.0);
+    }
+
+    /* Animation state: Soft fade + slight pan + subtle scale */
+    .hero-slanted-img.active.animating {
+      transform: scale(1.05) translateX(0);
+      /* End state: Scaled up, centered */
+    }
+
+    .hero-slanted-img.next {
+      opacity: 0;
+      z-index: 1;
+      /* Start state: Normal scale, slightly shifted right for pan effect */
+      transform: scale(1.0) translateX(15px);
+    }
+
+    .hero-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      /* Fixed 3 columns */
+      gap: 16px;
+      height: 110px;
+      margin-top: 4px;
+      /* Match the width of the slanted bottom approx */
+      width: 90%;
+    }
+
+    .thumbnail-item {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      background: var(--bg-white);
+      position: relative;
+      height: 100%;
+      /* No user interaction cues */
       pointer-events: none;
-      border-radius: 8px;
     }
 
-    .hero-mosaic:hover .mosaic-img {
-      transform: scale(1.02);
-    }
-
-    /* Proper stacking in right strip */
-    .mosaic-top {
-      height: 49%;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .mosaic-btm {
-      height: 49%;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Floating Cards */
-    .floating-cards {
-      position: absolute;
-      bottom: -20px;
-      left: 0;
-      right: 0;
-      z-index: 10;
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-    }
-
-    .float-card {
-      width: 140px;
-      height: 140px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 6px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-      transition: var(--transition);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .float-card img {
+    .thumb-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 12px;
+      transition: none;
+      /* Instant update as requested */
+      display: block;
     }
 
-    .float-card:hover {
-      transform: translateY(-15px) scale(1.03);
-      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.2);
-    }
-
-    .float-card:nth-child(2) {
-      transform: translateY(-25px);
-    }
+    /* No hover effects on thumbs as requested */
 
     /* Sections */
     .why-section {
@@ -749,7 +736,8 @@
 
     .carousel-track {
       display: flex;
-      width: 200%; /* Double the width to accommodate duplicated items */
+      width: 200%;
+      /* Double the width to accommodate duplicated items */
       animation: scroll 20s linear infinite;
     }
 
@@ -784,6 +772,7 @@
       0% {
         transform: translateX(0);
       }
+
       100% {
         transform: translateX(-50%);
       }
@@ -1017,7 +1006,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-image: 
+      background-image:
         radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.2) 1px, transparent 1px),
         radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.2) 1px, transparent 1px);
       background-size: 40px 40px;
@@ -1078,7 +1067,8 @@
       color: var(--text-dark);
     }
 
-    .main-footer, .main-footer * {
+    .main-footer,
+    .main-footer * {
       color: var(--text-dark);
     }
 
@@ -1225,7 +1215,8 @@
       border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    .bottom-footer, .bottom-footer * {
+    .bottom-footer,
+    .bottom-footer * {
       color: var(--text-dark);
     }
 
@@ -1273,8 +1264,17 @@
         text-align: center;
       }
 
-      .hero-mosaic {
-        display: none;
+      .hero-image-container {
+        flex: none;
+        margin-top: 40px;
+      }
+
+      .hero-main {
+        height: 280px;
+      }
+
+      .hero-thumbnails {
+        height: 100px;
       }
 
       .hero-actions {
@@ -1294,63 +1294,89 @@
       .score-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .footer-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-      
+
       .newsletter-form {
         flex-direction: column;
       }
-      
+
       .bottom-footer-content {
         flex-direction: column;
         text-align: center;
       }
     }
-    
+
+    @media (max-width: 768px) {
+      .hero-main {
+        height: 240px;
+      }
+
+      .hero-thumbnails {
+        display: flex;
+        height: auto;
+        min-height: 100px;
+      }
+
+      .thumbnail-item {
+        flex: 1;
+        height: 100px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+    }
+
     @media (max-width: 768px) {
       .hero-actions {
         flex-direction: column;
         gap: 16px;
       }
-      
+
       .hero-actions .btn {
         width: 100%;
       }
-      
+
       /* Button group spacing */
-      .hero-actions + div,
-      .section-padding > div:not(.hero-actions) {
+      .hero-actions+div,
+      .section-padding>div:not(.hero-actions) {
         margin-top: 16px;
       }
-      
+
       .why-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
       }
-      
+
       .footer-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    
+
     @media (max-width: 480px) {
       .why-grid {
         grid-template-columns: 1fr;
         gap: 16px;
       }
     }
-    
+
     @media (max-width: 768px) {
       .footer-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1509,6 +1535,22 @@
 
 <body>
   <header>
+    <!-- SVG Clip Path Definition for Slanted Hero -->
+    <svg width="0" height="0" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+      <defs>
+        <clipPath id="hero-clip-path" clipPathUnits="objectBoundingBox">
+          <!-- 
+             Refined Shape: Reduced corner radius to minimize aspect ratio distortion.
+             Top-Left: (0.02, 0)
+             Top-Right: (0.95, 0) -> slant start
+             Bottom-Right: (0.85, 1) -> slant end
+             Bottom-Left: (0.02, 1)
+          -->
+          <path
+            d="M 0.03,0 L 0.95,0 C 0.98,0 1.0,0.01 0.99,0.04 L 0.89,0.96 C 0.88,0.99 0.86,1 0.83,1 L 0.03,1 C 0.01,1 0,0.99 0,0.97 L 0,0.03 C 0,0.01 0.01,0 0.03,0 Z" />
+        </clipPath>
+      </defs>
+    </svg>
     <div class="container">
       <nav>
         <div class="logo">
@@ -1516,7 +1558,8 @@
           <span>AiFiLands</span>
         </div>
         <div class="nav-links">
-          <a href="#">Home</a><a href="#">About Us</a><a href="#">Services</a><a href="#types">Properties</a><a href="#contact">Contact</a><a href="#">Blog</a>
+          <a href="#">Home</a><a href="#">About Us</a><a href="#">Services</a><a href="#types">Properties</a><a
+            href="#contact">Contact</a><a href="#">Blog</a>
         </div>
         <div class="nav-actions">
           <a href="#contact" class="btn btn-outline" style="padding:12px 24px;">Login</a>
@@ -1545,30 +1588,29 @@
         <!-- Trust indicators omitted for brevity but can be added -->
       </div>
 
-      <!-- MOSAIC COMPOSITION (LEANING STRIPS) -->
-      <div class="hero-mosaic">
-        <!-- Left Strip: Farm -->
-        <div class="mosaic-strip-left">
-          <img src="images/Picture1.png" alt="Farm Land" class="mosaic-img">
-        </div>
-
-        <!-- Right Strip: Industry (Top) + Quarry (Bottom) -->
-        <div class="mosaic-strip-right">
-          <!-- Top: Industry -->
-          <div class="mosaic-top">
-            <img src="images/Picture5.png" alt="Industrial Chimneys" class="mosaic-img">
+      <div class="hero-slanted-container">
+        <div class="hero-slanted-wrapper">
+          <!-- True Slanted Hero Image Frame -->
+          <div class="hero-slanted-frame">
+            <!-- Two image slots for cross-fading -->
+            <!-- Image A: Initially active -->
+            <img src="images/Picture1.png" alt="Hero Land 1" class="hero-slanted-img active animating" id="hero-img-a">
+            <!-- Image B: Initially hidden (next) -->
+            <img src="images/Picture2.png" alt="Hero Land 2" class="hero-slanted-img" id="hero-img-b">
           </div>
-          <!-- Bottom: Quarry -->
-          <div class="mosaic-btm">
-            <img src="images/Picture2.png" alt="Quarry Mining" class="mosaic-img">
-          </div>
-        </div>
 
-        <!-- Floating Cards -->
-        <div class="floating-cards">
-          <div class="float-card"><img src="images/Picture3.png" alt="Thumbnail 1"></div>
-          <div class="float-card"><img src="images/Picture4.png" alt="Thumbnail 2"></div>
-          <div class="float-card"><img src="images/Picture1.png" alt="Thumbnail 3"></div>
+          <!-- Thumbnail Grid: Always 3 items -->
+          <div class="hero-thumbnails">
+            <div class="thumbnail-item">
+              <img src="images/Picture2.png" alt="Next 1" class="thumb-img" id="thumb-1">
+            </div>
+            <div class="thumbnail-item">
+              <img src="images/Picture3.png" alt="Next 2" class="thumb-img" id="thumb-2">
+            </div>
+            <div class="thumbnail-item">
+              <img src="images/Picture4.png" alt="Next 3" class="thumb-img" id="thumb-3">
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1656,23 +1698,28 @@
       </div>
       <div class="why-grid" style="grid-template-columns: repeat(5, 1fr); gap: 24px;">
         <div class="why-card">
-          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-exclamation-triangle"></i></div>
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i
+              class="fas fa-exclamation-triangle"></i></div>
           <h3>Unclear<br>Land Use</h3>
         </div>
         <div class="why-card">
-          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-gavel"></i></div>
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-gavel"></i>
+          </div>
           <h3>Regulatory<br>Blind Spots</h3>
         </div>
         <div class="why-card">
-          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-ruler-combined"></i></div>
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i
+              class="fas fa-ruler-combined"></i></div>
           <h3>Zoning &<br>Conversion Risks</h3>
         </div>
         <div class="why-card">
-          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-lock"></i></div>
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-lock"></i>
+          </div>
           <h3>Hidden<br>Encumbrances</h3>
         </div>
         <div class="why-card">
-          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i class="fas fa-chart-line"></i></div>
+          <div class="why-icon" style="background:rgba(239, 68, 68, 0.1); color:#ef4444;"><i
+              class="fas fa-chart-line"></i></div>
           <h3>Emotionally<br>Driven Pricing</h3>
         </div>
       </div>
@@ -1723,95 +1770,119 @@
           <div class="carousel-track">
             <!-- 1 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
+                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural
+                  Farmland
                 </h3>
               </div>
             </div>
             <!-- 2 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
+                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots &
+                  Layouts
                 </h3>
               </div>
             </div>
             <!-- 3 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
+                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands
+                </h3>
               </div>
             </div>
             <!-- 4 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
+                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial &
+                  Mixed-Use
                 </h3>
               </div>
             </div>
             <!-- 5 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
+                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands
+                </h3>
               </div>
             </div>
             <!-- 6 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
+                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use /
+                  Infrastructure
                 </h3>
               </div>
             </div>
-            
+
             <!-- Duplicate items for infinite scroll effect -->
             <!-- 1 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture1.png" alt="Agricultural Farmland"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural Farmland
+                <h3><i class="fas fa-seedling" style="margin-right:8px; color: var(--primary);"></i>Agricultural
+                  Farmland
                 </h3>
               </div>
             </div>
             <!-- 2 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture3.png" alt="Farm Plots & Layouts"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots & Layouts
+                <h3><i class="fas fa-layer-group" style="margin-right:8px; color: var(--primary);"></i>Farm Plots &
+                  Layouts
                 </h3>
               </div>
             </div>
             <!-- 3 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture5.png" alt="Industrial Lands"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands</h3>
+                <h3><i class="fas fa-industry" style="margin-right:8px; color: var(--primary);"></i>Industrial Lands
+                </h3>
               </div>
             </div>
             <!-- 4 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture4.png" alt="Commercial & Mixed-Use"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial & Mixed-Use
+                <h3><i class="fas fa-building" style="margin-right:8px; color: var(--primary);"></i>Commercial &
+                  Mixed-Use
                 </h3>
               </div>
             </div>
             <!-- 5 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture2.png" alt="Quarry & Mining Lands"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands</h3>
+                <h3><i class="fas fa-hammer" style="margin-right:8px; color: var(--primary);"></i>Quarry & Mining Lands
+                </h3>
               </div>
             </div>
             <!-- 6 -->
             <div class="type-card carousel-item">
-              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure" style="width: 100%; height: 260px; object-fit: cover;"></div>
+              <div class="type-image"><img src="images/Picture5.png" alt="Special-Use / Infrastructure"
+                  style="width: 100%; height: 260px; object-fit: cover;"></div>
               <div class="type-content">
-                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use / Infrastructure
+                <h3><i class="fas fa-road" style="margin-right:8px; color: var(--primary);"></i>Special-Use /
+                  Infrastructure
                 </h3>
               </div>
             </div>
@@ -1874,8 +1945,10 @@
           <h3 style="font-size: 1.5rem; margin-bottom: 24px;">If the land type is complex —<br>your due diligence must
             be stronger.</h3>
           <div style="display:flex; flex-direction: column; gap: 16px;">
-            <a href="#" class="btn btn-primary" style="width: 100%;"><i class="fas fa-search"></i>Explore Verified Properties</a>
-            <a href="#" class="btn btn-outline" style="width: 100%;"><i class="fas fa-headset"></i>Speak to Land Intelligence Team</a>
+            <a href="#" class="btn btn-primary" style="width: 100%;"><i class="fas fa-search"></i>Explore Verified
+              Properties</a>
+            <a href="#" class="btn btn-outline" style="width: 100%;"><i class="fas fa-headset"></i>Speak to Land
+              Intelligence Team</a>
           </div>
         </div>
       </div>
@@ -1899,11 +1972,11 @@
             <p>Land type declared, Documents uploaded, Usage stated.</p>
           </div>
         </div>
-        
+
         <div class="flow-connector">
           <i class="fas fa-arrow-right connector-icon"></i>
         </div>
-        
+
         <!-- Step 2 -->
         <div class="process-node">
           <div class="node-number">2</div>
@@ -1912,11 +1985,11 @@
             <p>Access check, Boundaries, Neighbouring activity.</p>
           </div>
         </div>
-        
+
         <div class="flow-connector">
           <i class="fas fa-arrow-right connector-icon"></i>
         </div>
-        
+
         <!-- Step 3 -->
         <div class="process-node">
           <div class="node-number">3</div>
@@ -1925,11 +1998,11 @@
             <p>Ownership checks, Zoning review, Litigation screening.</p>
           </div>
         </div>
-        
+
         <div class="flow-connector">
           <i class="fas fa-arrow-right connector-icon"></i>
         </div>
-        
+
         <!-- Step 4 -->
         <div class="process-node">
           <div class="node-number">4</div>
@@ -1938,11 +2011,11 @@
             <p>Legal clarity, Growth score, Pricing accuracy.</p>
           </div>
         </div>
-        
+
         <div class="flow-connector">
           <i class="fas fa-arrow-right connector-icon"></i>
         </div>
-        
+
         <!-- Step 5 -->
         <div class="process-node final-node">
           <div class="node-number">5</div>
@@ -1971,7 +2044,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Main Footer Area -->
     <div class="main-footer">
       <div class="container">
@@ -1983,12 +2056,12 @@
               <h2 class="footer-brand-name">AiFiLands</h2>
             </div>
             <p class="footer-description">
-              AiFiLands is a verified land intelligence platform that combines ground verification, 
-              legal checks, and AI-assisted scoring to help buyers, founders, and investors 
+              AiFiLands is a verified land intelligence platform that combines ground verification,
+              legal checks, and AI-assisted scoring to help buyers, founders, and investors
               make high-conviction land decisions.
             </p>
           </div>
-          
+
           <!-- Column 2 - Contact Information -->
           <div class="footer-col">
             <h4 class="footer-heading">Contact Info</h4>
@@ -2013,7 +2086,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Column 3 - Useful Links -->
           <div class="footer-col">
             <h4 class="footer-heading">Useful Links</h4>
@@ -2038,7 +2111,7 @@
               </a>
             </div>
           </div>
-          
+
           <!-- Column 4 - Gallery -->
           <div class="footer-col">
             <h4 class="footer-heading">Our Gallery</h4>
@@ -2066,7 +2139,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- Bottom Footer Bar -->
     <div class="bottom-footer">
       <div class="container">
@@ -2095,6 +2168,98 @@
       </div>
     </div>
   </footer>
+  <!-- Auto-transitioning script (Ordered Logic) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Config
+      const TRANSITION_DURATION = 900; // ms (matches CSS)
+      const INTERVAL_MS = 5500; // 5.5 seconds
+
+      // Image Source Array (Fixed Order)
+      const images = [
+        'images/Picture1.png',
+        'images/Picture2.png',
+        'images/Picture3.png',
+        'images/Picture4.png',
+        'images/Picture5.png' // Using all 5 available
+      ];
+
+      // State Management
+      // We index into `images`. 
+      // Current Hero is at `heroIndex`.
+      // Thumbs are at `(heroIndex + 1)`, `(heroIndex + 2)`, `(heroIndex + 3)`
+      let heroIndex = 0;
+
+      // DOM Elements
+      const heroImgA = document.getElementById('hero-img-a');
+      const heroImgB = document.getElementById('hero-img-b');
+
+      const thumb1 = document.getElementById('thumb-1');
+      const thumb2 = document.getElementById('thumb-2');
+      const thumb3 = document.getElementById('thumb-3');
+
+      // Helper to get image URL safely with wrapping
+      const getImg = (offset) => images[(heroIndex + offset) % images.length];
+
+      // Initialize Thumbs correctly (in case HTML is out of sync)
+      function updateThumbsImmediate() {
+        thumb1.src = getImg(1);
+        thumb2.src = getImg(2);
+        thumb3.src = getImg(3);
+      }
+
+      // Flag to toggle between Slot A and Slot B being the "Active" one
+      let usingSlotA = true;
+
+      // Initial Setup
+      updateThumbsImmediate();
+
+      function rotateImages() {
+        // Log logic: Hero was Index 0.
+        // New Hero will be Index 1.
+        // Thumbs should be 2, 3, 4.
+        // Old Hero (Index 0) moves effectively to end of line (in a circular buffer sense).
+
+        // 1. Determine "Next" Image URL
+        const nextHeroIndex = (heroIndex + 1) % images.length;
+        const nextHeroUrl = images[nextHeroIndex];
+
+        // 2. Identify Active vs Next Slots
+        const currentSlot = usingSlotA ? heroImgA : heroImgB;
+        const nextSlot = usingSlotA ? heroImgB : heroImgA;
+
+        // 3. Prepare "Next" Slot
+        nextSlot.src = nextHeroUrl;
+        nextSlot.className = 'hero-slanted-img next'; // Reset / Ensure it's in 'next' state
+
+        // Force reflow to ensure browser registers the starting state before fading in
+        void nextSlot.offsetWidth;
+
+        // 4. Update Thumbs INSTANTLY (As requested: "Instant source swap")
+        // We update thumbs to show what is coming AFTER the NEW hero.
+        // If new hero is Index+1, thumbs are Index+2, Index+3, Index+4.
+        thumb1.src = images[(nextHeroIndex + 1) % images.length];
+        thumb2.src = images[(nextHeroIndex + 2) % images.length];
+        thumb3.src = images[(nextHeroIndex + 3) % images.length];
+
+        // 5. Execute Hero Transition
+        // CRITICAL FIX: Remove 'next' class before adding 'active' to ensure opacity applies
+        nextSlot.classList.remove('next');
+        nextSlot.classList.add('active'); // CSS matches: opacity: 1, z-index: 2
+        nextSlot.classList.add('animating'); // Start the subtle scale pan
+
+        currentSlot.classList.remove('active'); // Drop z-index, opacity -> 0
+        currentSlot.classList.remove('animating');
+
+        // 6. Update State
+        heroIndex = nextHeroIndex;
+        usingSlotA = !usingSlotA;
+      }
+
+      // Start Loop
+      setInterval(rotateImages, INTERVAL_MS);
+    });
+  </script>
 </body>
 
 </html>
